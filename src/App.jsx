@@ -1,42 +1,34 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Account from "./pages/Account";
+import Users from "./pages/Users";
+import Settings from "./pages/Settings";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
 import GlobalStyles from "./styles/GlobalStyles";
-import styled from "styled-components";
+import AppLayout from "./ui/AppLayout";
 
-const H1 = styled.h1`
-  font-size: 30px;
-  font-weight: 600;
-`;
-
-const Button = styled.button`
-  font-size: 1.4rem;
-  padding: 1.2rem 1.6rem;
-  font-weight: 500;
-  border: none;
-  border-radius: 7px;
-  background-color: purple;
-  color: white;
-  margin: 20px;
-  cursor: pointer;
-`;
-
-const Input = styled.input`
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 0.8rem 1.2rem;
-`;
-
-const StyledApp = styled.main`
-  background-color: lightgrey;
-`;
 export default function App() {
   return (
     <>
-      <StyledApp>
-        <GlobalStyles />
-        <H1>The Wild Oasis</H1>
-        <Button>Check in</Button>
-        <Button>Check out</Button>
-        <Input placeholder="Number of guests" type="number" />
-      </StyledApp>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to="dashboard" />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="booking" element={<Bookings />} />
+            <Route path="cabins" element={<Cabins />} />
+            <Route path="account" element={<Account />} />
+            <Route path="users" element={<Users />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
