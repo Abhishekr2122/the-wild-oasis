@@ -29,6 +29,7 @@ const TableHeader = styled.header`
 `;
 
 export default function CabinTable() {
+  // fetching cabin data from supabase
   const {
     isLoading,
     data: cabins,

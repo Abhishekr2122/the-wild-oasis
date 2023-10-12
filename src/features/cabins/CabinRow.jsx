@@ -55,16 +55,19 @@ export default function CabinRow({ cabin }) {
 
   const queryClient = useQueryClient();
 
+  // deleting the cabin
   const {
     data,
     mutate,
     isLoading: isDeleting,
   } = useMutation({
     mutationFn: deleteCabin,
+
     onSuccess: function () {
       toast.success("Successfully deleted");
       queryClient.invalidateQueries(["cabins"]);
     },
+
     onError: function (err) {
       toast.error(err.message);
     },
