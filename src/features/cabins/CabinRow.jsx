@@ -44,14 +44,10 @@ const Discount = styled.div`
 `;
 
 export default function CabinRow({ cabin }) {
-  const {
-    id: cabinId,
-    name,
-    maxCapacity,
-    image,
-    regularPrice,
-    discount,
-  } = cabin;
+  const { id, name, maxCapacity, image, regularPrice, discount } = cabin;
+  console.log("this is image source", image);
+
+  // console.log(cabinId);
 
   const queryClient = useQueryClient();
 
@@ -82,7 +78,7 @@ export default function CabinRow({ cabin }) {
       <Discount>{formatCurrency(discount)}</Discount>
       <button
         onClick={function () {
-          mutate(cabinId);
+          mutate(id);
         }}
         disabled={isDeleting}
       >

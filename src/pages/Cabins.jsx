@@ -23,7 +23,7 @@ function Cabins() {
             });
           }}
         >
-          Add new Cabin
+          {showNewForm ? "Close cabin form" : "Add new Cabin"}
         </Button>
         {showNewForm && <CreateCabinForm />}
       </Row>
