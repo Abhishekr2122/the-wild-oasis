@@ -1,14 +1,14 @@
-import styled from "styled-components";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
+import styled from "styled-components";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCabin } from "../../services/apiCabins";
-import toast from "react-hot-toast";
 
 const FormRow = styled.div`
   display: grid;
@@ -46,12 +46,12 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function CreateCabinForm() {
+function CreateCabinForm({ cabinToEdit }) {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
 
+  const { id: editId, ...editValues } = cabinToEdit;
+
   const { errors } = formState;
-  console.log(formState);
-  console.log(errors);
 
   const queryClient = useQueryClient();
 
@@ -161,7 +161,6 @@ function CreateCabinForm() {
         <Textarea
           type="text"
           id="description"
-          defaultValue=""
           {...register("description", { required: "This field is required" })}
         />
         {errors?.description?.message && (
