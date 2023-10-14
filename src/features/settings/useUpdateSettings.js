@@ -13,8 +13,8 @@ export function useUpdateSettings() {
         queryKey: ["settings"],
       });
     },
-    onError: function () {
-      toast.error("Settings could not be updated");
+    onError: function (err) {
+      toast.error(err.message);
     },
   });
 
