@@ -19,7 +19,7 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function CreateCabinForm({ cabinToEdit = {}, setIsOpenModal }) {
+function CreateCabinForm({ cabinToEdit = {}, onClose }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, editCabin } = useEditCabin();
 
@@ -57,6 +57,7 @@ function CreateCabinForm({ cabinToEdit = {}, setIsOpenModal }) {
         {
           onSuccess: function () {
             reset();
+            onClose();
           },
         }
       );
@@ -172,13 +173,7 @@ function CreateCabinForm({ cabinToEdit = {}, setIsOpenModal }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button
-          variation="secondary"
-          type="reset"
-          onClick={function () {
-            setIsOpenModal(false);
-          }}
-        >
+        <Button variation="secondary" type="reset" onClick={onClose}>
           Cancel
         </Button>
         <Button disabled={isWorking}>

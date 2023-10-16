@@ -18,8 +18,16 @@ export function AddCabin() {
         {isOpenModal ? "Close cabin form" : "Add new Cabin"}
       </Button>
       {isOpenModal && (
-        <Modal>
-          <CreateCabinForm setIsOpenModal={setIsOpenModal} />
+        <Modal
+          onClose={function () {
+            setIsOpenModal(false);
+          }}
+        >
+          <CreateCabinForm
+            onClose={function () {
+              setIsOpenModal(false);
+            }}
+          />
         </Modal>
       )}
     </div>
