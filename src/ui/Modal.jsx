@@ -1,11 +1,5 @@
-import {
-  cloneElement,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
+import { useOutSideClick } from "../hooks/useOutsideClick";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
@@ -90,24 +84,7 @@ function Open({ children, opens: opensWindowName }) {
 function Window({ children, name }) {
   const { isOpenName, close } = useContext(ModalContext);
 
-  const ref = useRef();
-
-  useEffect(
-    function () {
-      function handleClick(e) {
-        if (ref.current && !ref.current.contains(e.target)) {
-          close();
-        }
-      }
-
-      document.addEventListener("click", handleClick, true);
-
-      return function () {
-        document.removeEventListener("click", handleClick, true);
-      };
-    },
-    [close]
-  );
+  const ref = useOutSideClick(close);
 
   if (isOpenName !== name) {
     return null;

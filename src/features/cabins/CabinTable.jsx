@@ -3,6 +3,7 @@ import { useCabins } from "./useCabins";
 import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
+import { AddCabin } from "./AddCabin";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -37,7 +38,7 @@ export default function CabinTable() {
   }
 
   return (
-    <div>
+    <>
       <Table role="table">
         <TableHeader role="row">
           <div></div>
@@ -51,6 +52,8 @@ export default function CabinTable() {
           return <CabinRow cabin={cabin} key={cabin.id} />;
         })}
       </Table>
-    </div>
+
+      <AddCabin />
+    </>
   );
 }
