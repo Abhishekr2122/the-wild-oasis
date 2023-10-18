@@ -49,9 +49,12 @@ export default function CabinTable() {
           <div>Discount</div>
           <div></div>
         </Table.Header>
-        {cabins.map(function (cabin) {
-          return <CabinRow cabin={cabin} key={cabin.id} />;
-        })}
+        <Table.Body
+          data={cabins}
+          render={function (cabin) {
+            return <CabinRow cabin={cabin} key={cabin.id} />;
+          }}
+        />
       </Table>
 
       <AddCabin />
