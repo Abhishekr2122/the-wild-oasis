@@ -53,7 +53,7 @@ const Button = styled.button`
   }
 `;
 
-const ModalContext = createContext();
+export const ModalContext = createContext();
 
 export function Modal({ children }) {
   const [isOpenName, setIsOpenName] = useState("");

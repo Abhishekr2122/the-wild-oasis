@@ -5,6 +5,7 @@ import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import { AddCabin } from "./AddCabin";
 import { Table } from "../../ui/Table";
+import { Menus } from "../../ui/Menus";
 
 // const Table = styled.div`
 //   border: 1px solid var(--color-grey-200);
@@ -39,7 +40,7 @@ export default function CabinTable() {
   }
 
   return (
-    <>
+    <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
         <Table.Header>
           <div></div>
@@ -56,8 +57,7 @@ export default function CabinTable() {
           }}
         />
       </Table>
-
       <AddCabin />
-    </>
+    </Menus>
   );
 }
