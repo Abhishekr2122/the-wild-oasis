@@ -22,6 +22,7 @@ export function CabinTableOperations() {
           { value: "maxCapacity-asc", label: "Sort by capacity(low first)" },
           { value: "maxCapacity-desc", label: "Sort by capacity(high first)" },
         ]}
+        fieldName="sortBy"
       />
     </TableOperations>
   );

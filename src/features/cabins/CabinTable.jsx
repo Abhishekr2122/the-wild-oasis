@@ -7,15 +7,6 @@ import { Table } from "../../ui/Table";
 import { Menus } from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 
-// const Table = styled.div`
-//   border: 1px solid var(--color-grey-200);
-
-//   font-size: 1.4rem;
-//   background-color: var(--color-grey-0);
-//   border-radius: 7px;
-//   overflow: hidden;
-// `;
-
 export default function CabinTable() {
   // fetching cabin data from supabase
   const { isLoading, cabins } = useCabins();
@@ -25,6 +16,7 @@ export default function CabinTable() {
     return <Spinner />;
   }
 
+  // 1) Filter
   const filterValue = searchParams.get("discount") || "all";
 
   let filterCabins;
@@ -45,6 +37,14 @@ export default function CabinTable() {
     });
   }
 
+  // 2) Sort
+  const sortBy = searchParams.get("sortBy") || "startDate-asc";
+  const [field, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+  const sortedCabins = filterCabins.sort(
+    (a, b) => (a[field] - b[field]) * modifier
+  );
+
   return (
     <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
@@ -57,7 +57,7 @@ export default function CabinTable() {
           <div></div>
         </Table.Header>
         <Table.Body
-          data={filterCabins}
+          data={sortedCabins}
           render={function (cabin) {
             return <CabinRow cabin={cabin} key={cabin.id} />;
           }}
