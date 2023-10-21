@@ -7,9 +7,25 @@ const StyledSelect = styled.select`
     ${(props) =>
       props.type === "white"
         ? "var(--color-grey-100)"
-        : "var(--color-grey-300)"};
+        : "var(--color-black-300)"};
   border-radius: var(--border-radius-sm);
   background-color: var(--color-grey-0);
   font-weight: 500;
   box-shadow: var(--shadow-sm);
 `;
+
+function Select({ options }) {
+  return (
+    <StyledSelect>
+      {options.map(function (crrOption) {
+        return (
+          <option value={crrOption.value} key={crrOption.value}>
+            {crrOption.label}
+          </option>
+        );
+      })}
+    </StyledSelect>
+  );
+}
+
+export default Select;

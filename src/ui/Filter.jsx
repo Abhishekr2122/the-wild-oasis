@@ -56,6 +56,7 @@ function Filter({ filterField, options }) {
             }}
             key={crrOption.value}
             active={currentFilterValue === crrOption.value}
+            disabled={currentFilterValue === crrOption.value}
           >
             {crrOption.label}
           </FilterButton>
