@@ -21,7 +21,7 @@ async function deleteGuests() {
 }
 
 async function deleteCabins() {
-  const { error } = await supabase.from("cabins").delete().gt("id", 0);
+  const { error } = await supabase.from("Cabins").delete().gt("id", 0);
   if (error) console.log(error.message);
 }
 
@@ -36,7 +36,7 @@ async function createGuests() {
 }
 
 async function createCabins() {
-  const { error } = await supabase.from("cabins").insert(cabins);
+  const { error } = await supabase.from("Cabins").insert(cabins);
   if (error) console.log(error.message);
 }
 
@@ -47,11 +47,12 @@ async function createBookings() {
     .select("id")
     .order("id");
   const allGuestIds = guestsIds.map((cabin) => cabin.id);
+
   const { data: cabinsIds } = await supabase
-    .from("cabins")
+    .from("Cabins")
     .select("id")
     .order("id");
-  const allCabinIds = cabinsIds.map((cabin) => cabin.id);
+  const allCabinIds = cabinsIds?.map((cabin) => cabin.id);
 
   const finalBookings = bookings.map((booking) => {
     // Here relying on the order of cabins, as they don't have and ID yet
@@ -88,8 +89,8 @@ async function createBookings() {
       cabinPrice,
       extrasPrice,
       totalPrice,
-      guestId: allGuestIds.at(booking.guestId - 1),
-      cabinId: allCabinIds.at(booking.cabinId - 1),
+      guestId: allGuestIds?.at(booking.guestId - 1),
+      cabinId: allCabinIds?.at(booking.cabinId - 1),
       status,
     };
   });
