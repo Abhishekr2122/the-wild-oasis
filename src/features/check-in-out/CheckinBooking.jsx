@@ -15,6 +15,7 @@ import Spinner from "../../ui/Spinner";
 import Checkbox from "../../ui/Checkbox";
 import { formatCurrency } from "../../utils/helpers";
 import useCheckin from "./useCheckin";
+import useCheckout from "./useCheckout";
 
 const Box = styled.div`
   /* Box */
@@ -31,6 +32,7 @@ function CheckinBooking() {
   const moveBack = useMoveBack();
   const { data, isLoading } = useBookingDetails();
   const { checkIn, isCheckingIn } = useCheckin();
+  const { checkOut, isCheckingout } = useCheckout();
 
   console.log(settings);
 
@@ -131,6 +133,7 @@ function CheckinBooking() {
         <Button onClick={handleCheckin} disabled={!confirmPaid || isCheckingIn}>
           Check in booking #{bookingId}
         </Button>
+
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
