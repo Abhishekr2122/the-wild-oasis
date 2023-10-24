@@ -12,8 +12,7 @@ export default function useLogin() {
       return loginApi({ email, password });
     },
     onSuccess: function (user) {
-      queryClient.setQueryData(["user", user]);
-      toast.success("Successfully logged in");
+      queryClient.setQueryData(["user", user.user]);
       navigate("/dashboard", { replace: true });
     },
     onError: function () {
