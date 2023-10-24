@@ -14,10 +14,15 @@ const Paragraph = styled.p`
 `;
 
 function SignupForm() {
-  const { register, formState } = useForm();
+  const { register, formState, getValues, handleSubmit } = useForm();
   const { errors } = formState;
+
+  function onSubmit(data) {
+    console.log(data);
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
         <label>
           <strong>Full Name</strong>
@@ -27,7 +32,7 @@ function SignupForm() {
           id="fullName"
           {...register("fullName", { required: "This field is required" })}
         />
-        <Paragraph>hi</Paragraph>
+        <Paragraph>{errors?.fullName?.message}</Paragraph>
       </FormRow>
 
       <FormRow>
@@ -37,8 +42,15 @@ function SignupForm() {
         <Input
           type="email"
           id="email"
-          {...register("email", { required: "This field is required" })}
+          {...register("email", {
+            required: "This field is required",
+            pattern: {
+              value: /S+@S+.S+/,
+              message: "Please provide a valid email address",
+            },
+          })}
         />
+        <Paragraph>{errors?.email?.message}</Paragraph>
       </FormRow>
 
       <FormRow>
@@ -48,8 +60,15 @@ function SignupForm() {
         <Input
           type="password"
           id="password"
-          {...register("password", { required: "This field is required" })}
+          {...register("password", {
+            required: "This field is required",
+            minLength: {
+              value: 8,
+              message: "Password needs a minimum of 8 characters",
+            },
+          })}
         />
+        <Paragraph>{errors?.password?.message}</Paragraph>
       </FormRow>
 
       <FormRow>
@@ -61,8 +80,14 @@ function SignupForm() {
           id="passwordConfirm"
           {...register("passwordConfirm", {
             required: "This field is required",
+            validate: function (value) {
+              if (value === getValues().password) {
+                return "Passwords need to match ";
+              }
+            },
           })}
         />
+        <Paragraph>{errors?.passwordConfirm?.message}</Paragraph>
       </FormRow>
 
       <FormRow>
