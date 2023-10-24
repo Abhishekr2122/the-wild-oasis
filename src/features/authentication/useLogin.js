@@ -14,7 +14,7 @@ export default function useLogin() {
     onSuccess: function (user) {
       queryClient.setQueryData(["user", user]);
       toast.success("Successfully logged in");
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     },
     onError: function () {
       toast.error("Provided email or password are incorrect");
