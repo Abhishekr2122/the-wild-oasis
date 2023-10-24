@@ -48,11 +48,12 @@ async function createBookings() {
     .order("id");
   const allGuestIds = guestsIds.map((cabin) => cabin.id);
 
-  const { data: cabinsIds } = await supabase
-    .from("Cabins")
-    .select("id")
-    .order("id");
-  const allCabinIds = cabinsIds?.map((cabin) => cabin.id);
+  const { data } = await supabase.from("Cabins").select("*");
+
+  const allCabinIds = data?.map(function (currCabin) {
+    return currCabin.id;
+  });
+  console.log("I am the result from Uploaders" + allCabinIds);
 
   const finalBookings = bookings.map((booking) => {
     // Here relying on the order of cabins, as they don't have and ID yet

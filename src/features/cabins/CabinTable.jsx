@@ -10,6 +10,7 @@ import { useSearchParams } from "react-router-dom";
 export default function CabinTable() {
   // fetching cabin data from supabase
   const { isLoading, cabins } = useCabins();
+
   const [searchParams] = useSearchParams();
 
   if (isLoading) {

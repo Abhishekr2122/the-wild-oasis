@@ -6,16 +6,16 @@ export default function useDeleteBooking() {
   const queryClient = useQueryClient();
   const { mutate: deleteBooking, isLoading: isDeletingBooking } = useMutation({
     mutationFn: function (bookingId) {
-      deleteBookingApi(bookingId);
+      return deleteBookingApi(bookingId);
     },
 
     onSuccess: function () {
       toast.success("booking successfully deleted");
-      queryClient.invalidateQueries({ active: true });
+      queryClient.invalidateQueries(["bookings"]);
     },
 
-    onError: function () {
-      toast.error("booking could not be deleted ");
+    onError: function (err) {
+      toast.error(err.message);
     },
   });
 
