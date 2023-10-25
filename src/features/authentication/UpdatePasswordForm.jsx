@@ -34,7 +34,7 @@ function UpdatePasswordForm() {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
         <label>
-          <strong>Password</strong>
+          <strong> New Password (min 8 chars)</strong>
         </label>
         <Input
           type="password"
