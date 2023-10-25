@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useRecentBookings } from "./useRecentBookings";
 import Spinner from "../../ui/Spinner";
 import { useRecentStays } from "./useRecentStays";
+import Stats from "./Stats";
+import { useCabins } from "../cabins/useCabins";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -12,9 +14,16 @@ const StyledDashboardLayout = styled.div`
 
 export default function DashBoardLayout() {
   const { bookings, isLoading: loading1 } = useRecentBookings();
-  const { recentStays, isLoading: loading2 } = useRecentStays();
+  const {
+    recentStays,
+    isLoading: loading2,
+    confirmedStays,
+    numDays,
+  } = useRecentStays();
 
-  if (loading1 || loading2) {
+  const { cabins, isLoading: loading3 } = useCabins();
+
+  if (loading1 || loading2 || loading3) {
     return <Spinner />;
   }
 
@@ -22,7 +31,12 @@ export default function DashBoardLayout() {
 
   return (
     <StyledDashboardLayout>
-      <div>Statistics</div>
+      <Stats
+        bookings={bookings}
+        confirmedStays={confirmedStays}
+        numDays={numDays}
+        cabinCount={cabins.length}
+      />
       <div>Todays activity</div>
       <div>Chart stay durations</div>
       <div>Chart Sales</div>
