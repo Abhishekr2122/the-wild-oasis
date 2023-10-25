@@ -9,6 +9,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 0.5rem;
 `;
 
 export default function Header() {
