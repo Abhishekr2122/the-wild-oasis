@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { useRecentBookings } from "./useRecentBookings";
+import Spinner from "../../ui/Spinner";
+import { useRecentStays } from "./useRecentStays";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -8,6 +11,15 @@ const StyledDashboardLayout = styled.div`
 `;
 
 export default function DashBoardLayout() {
+  const { bookings, isLoading: loading1 } = useRecentBookings();
+  const { recentStays, isLoading: loading2 } = useRecentStays();
+
+  if (loading1 || loading2) {
+    return <Spinner />;
+  }
+
+  console.log(bookings);
+
   return (
     <StyledDashboardLayout>
       <div>Statistics</div>
